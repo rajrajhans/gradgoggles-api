@@ -1,6 +1,7 @@
 from datetime import *
 from peewee import *
 import os
+from flask_bcrypt import generate_password_hash
 
 DATABASE_proxy = Proxy()
 
@@ -18,16 +19,26 @@ else:
 
 
 class User(Model):
-    name = CharField(max_length=30)
+    name = CharField(max_length=30, default=None, null=True)
     email = CharField(unique=True)
     password = CharField(max_length=150)
     joined_at = DateTimeField(default=datetime.now)
+    
+    quote = TextField(default=None, null=True)
+    photo = CharField(max_length=200, default=None, null=True)
+    gr = CharField(max_length=50, default=None, null=True)
+    dob = DateTimeField(default=None, null=True)
+    dept = CharField(default=None, null=True)
 
-    quote = TextField()
-    photo = CharField(max_length=200)
-    gr = CharField(max_length=50)
-    dob = DateTimeField()
-    dept = CharField()
+    @classmethod
+    def create_user(cls, email, password):
+        try:
+            with DATABASE.transaction():
+                user = cls.create(
+                    email=email,
+                    password=generate_password_hash(password))
+        except IntegrityError:
+            raise ValueError("User already exists")
 
     class Meta:
         database = DATABASE_proxy
@@ -48,5 +59,5 @@ class Scrap(Model):
 
 def initialize():
     DATABASE_proxy.connection()
-    DATABASE_proxy.create_tables([User])
+    DATABASE_proxy.create_tables([User, Scrap])
     DATABASE_proxy.close()

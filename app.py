@@ -2,12 +2,12 @@ from flask import Flask, jsonify, g
 from flask_restful import Api
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 import resources
-import models\
+import models
 from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
-cors = CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.secret_key = 'rajrajhanskbrtgw490kjs!'
 app.config['JWT_SECRET-KEY'] = 'rajrajhanskbrtgw490kjs!'

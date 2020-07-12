@@ -6,14 +6,26 @@ from models import User
 parser = reqparse.RequestParser()
 parser.add_argument('email', help='Email cannot be blank', required=True)
 parser.add_argument('password', help='Password cannot be blank', required=True)
+parser.add_argument('fullName', help='Full Name cannot be blank', required=True)
+parser.add_argument('GRNo')
+parser.add_argument('dept')
+parser.add_argument('dob')
+parser.add_argument('quote')
 
 
 class UserRegistration(Resource):
     def post(self):
         data = parser.parse_args()
         if User.get_or_none(User.email == data['email']) is not None:
-            return {"error": "User already exists1234"}
-        User.create_user(email=data['email'], password=data['password'])
+            return {"error": "User already exists"}
+        User.create_user(email=data['email'],
+                         password=data['password'],
+                         name=data['fullName'],
+                         gr=data['GRNo'],
+                         dept=data['dept'],
+                         dob=data['dob'],
+                         quote=data['quote']
+                         )
 
         access_token = create_access_token(identity=data['email'])
         refresh_token = create_refresh_token(identity=data['email'])

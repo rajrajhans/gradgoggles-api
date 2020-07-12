@@ -31,12 +31,18 @@ class User(Model):
     dept = CharField(default=None, null=True)
 
     @classmethod
-    def create_user(cls, email, password):
+    def create_user(cls, email, password, name, gr=None, dept=None, dob=None, quote=None):
         try:
             with DATABASE.transaction():
                 user = cls.create(
                     email=email,
-                    password=generate_password_hash(password))
+                    password=generate_password_hash(password),
+                    name=name,
+                    gr=gr,
+                    dept=dept,
+                    dob=dob,
+                    quote=quote
+                )
         except IntegrityError:
             raise ValueError("User already exists")
 

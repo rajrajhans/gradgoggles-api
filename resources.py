@@ -1,21 +1,26 @@
 from flask_bcrypt import check_password_hash
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
+from flask_jwt_extended import get_current_user
 from flask_restful import Resource, reqparse
 from models import User
 
-parser = reqparse.RequestParser()
-parser.add_argument('email', help='Email cannot be blank', required=True)
-parser.add_argument('password', help='Password cannot be blank', required=True)
-parser.add_argument('fullName', help='Full Name cannot be blank', required=True)
-parser.add_argument('GRNo')
-parser.add_argument('dept')
-parser.add_argument('dob')
-parser.add_argument('quote')
+regparser = reqparse.RequestParser()
+regparser.add_argument('email', help='Email cannot be blank', required=True)
+regparser.add_argument('password', help='Password cannot be blank', required=True)
+regparser.add_argument('fullName', help='Full Name cannot be blank', required=True)
+regparser.add_argument('GRNo')
+regparser.add_argument('dept')
+regparser.add_argument('dob')
+regparser.add_argument('quote')
+
+loginparser = reqparse.RequestParser()
+loginparser.add_argument('email', help='Email cannot be blank', required=True)
+loginparser.add_argument('password', help='Password cannot be blank', required=True)
 
 
 class UserRegistration(Resource):
     def post(self):
-        data = parser.parse_args()
+        data = regparser.parse_args()
         if User.get_or_none(User.email == data['email']) is not None:
             return {"error": "User already exists"}
         User.create_user(email=data['email'],
@@ -31,7 +36,8 @@ class UserRegistration(Resource):
         refresh_token = create_refresh_token(identity=data['email'])
 
         return {
-            'email': data['email'],
+            'name': data['fullName'],
+            'photo': 'nothing',  # todo
             'access_token': access_token,
             'refresh_token': refresh_token
         }
@@ -40,7 +46,7 @@ class UserRegistration(Resource):
 class UserLogin(Resource):
     def post(self):
         try:
-            data = parser.parse_args()
+            data = loginparser.parse_args()
 
             user = User.get_or_none(User.email == data['email'])
 
@@ -52,7 +58,8 @@ class UserLogin(Resource):
                     refresh_token = create_refresh_token(identity=data['email'])
 
                     return {
-                        'email': data['email'],
+                        'name': user.name,
+                        'photo': user.photo,
                         'access_token': access_token,
                         'refresh_token': refresh_token
                     }
@@ -60,4 +67,19 @@ class UserLogin(Resource):
                     return {'error': 'Email or password does not match'}
 
         except:
-            return Exception("Login Error")
+            return {"exception": "login error"}
+
+
+class GetCurrentUserData(Resource):
+    @jwt_required
+    def get(self):
+        current_user = get_current_user()
+        return {
+            "email": current_user.email,
+            "fullName": current_user.name,
+            "quote": current_user.quote,
+            "photo": current_user.photo,
+            "gr": current_user.gr,
+            "dob": current_user.dob,
+            "dept": current_user.dept
+        }

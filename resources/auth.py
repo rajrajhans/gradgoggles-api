@@ -68,18 +68,3 @@ class UserLogin(Resource):
 
         except:
             return {"exception": "login error"}
-
-
-class GetCurrentUserData(Resource):
-    @jwt_required
-    def get(self):
-        current_user = get_current_user()
-        return {
-            "email": current_user.email,
-            "fullName": current_user.name,
-            "quote": current_user.quote,
-            "photo": current_user.photo,
-            "gr": current_user.gr,
-            "dob": current_user.dob,
-            "dept": current_user.dept
-        }

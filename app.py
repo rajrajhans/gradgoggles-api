@@ -1,13 +1,18 @@
-from flask import Flask, jsonify, g
-from flask_restful import Api
-from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
-import resources
-import models
 import logging
+from flask import Flask, jsonify, g
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
+from flask_restful import Api
+from custom_json_encoder import custom_json_output
+import models
+from resources import auth
+from resources import userdata
 
 app = Flask(__name__)
 api = Api(app)
+api.representations.update({
+    'application/json': custom_json_output
+})
 cors = CORS(app)
 logging.getLogger('flask_cors').level = logging.DEBUG
 
@@ -17,12 +22,14 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 
 jwt = JWTManager(app)
 
+
 @jwt.user_loader_callback_loader
 def userLoader(identity):
     try:
         return models.User.get(models.User.email == identity)
     except:
         return None
+
 
 @app.before_request
 def before_request():
@@ -45,9 +52,10 @@ def index():
     return jsonify({"hi": "raj"})
 
 
-api.add_resource(resources.UserRegistration, '/register')
-api.add_resource(resources.UserLogin, '/login')
-api.add_resource(resources.GetCurrentUserData, '/getCurrentUserData')
+api.add_resource(auth.UserRegistration, '/register')
+api.add_resource(auth.UserLogin, '/login')
+api.add_resource(userdata.GetCurrentUserData, '/getCurrentUserData')
+api.add_resource(userdata.GetAllUserData, '/getAllUserData')
 
 if __name__ == "__main__":
     app.debug = True

@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/custom_json_encoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/userdata.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils-0.1.1-py3.7.egg-info/PKG-INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils-0.1.1-py3.7.egg-info/SOURCES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils-0.1.1-py3.7.egg-info/dependency_links.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils-0.1.1-py3.7.egg-info/installed-files.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils-0.1.1-py3.7.egg-info/not-zip-safe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils-0.1.1-py3.7.egg-info/requires.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils-0.1.1-py3.7.egg-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils/decorators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/flask_utils/jinja2htmlcompress.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/userdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/userdata.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +96,7 @@
       <workItem from="1594541941980" duration="11241000" />
       <workItem from="1594577516395" duration="2502000" />
       <workItem from="1594645932805" duration="2305000" />
-      <workItem from="1594738828385" duration="5056000" />
+      <workItem from="1594738828385" duration="6280000" />
     </task>
     <servers />
   </component>

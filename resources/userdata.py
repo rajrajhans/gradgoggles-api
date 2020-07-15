@@ -5,6 +5,7 @@ from models import User
 from playhouse.shortcuts import model_to_dict
 from playhouse.flask_utils import PaginatedQuery
 
+
 class GetCurrentUserData(Resource):
     @jwt_required
     def get(self):

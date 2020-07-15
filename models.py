@@ -6,7 +6,7 @@ from flask_bcrypt import generate_password_hash
 DATABASE_proxy = Proxy()
 
 if 'HEROKU' in os.environ:
-    import urllib.parse
+    import urllib.parse, psycopg2
 
     urllib.parse.uses_netloc.append('postgres')
     url = urllib.parse.urlparse(os.environ["DATABASE_URL"])

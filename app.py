@@ -58,6 +58,6 @@ api.add_resource(userdata.GetCurrentUserData, '/getCurrentUserData')
 api.add_resource(userdata.GetAllUserData, '/getAllUserData')
 
 if __name__ == "__main__":
-    app.debug = True
+    app.debug = False
     models.initialize()
     app.run()

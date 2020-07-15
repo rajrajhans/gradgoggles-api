@@ -19,6 +19,7 @@ logging.getLogger('flask_cors').level = logging.DEBUG
 app.secret_key = 'rajrajhanskbrtgw490kjs!'
 app.config['JWT_SECRET-KEY'] = 'rajrajhanskbrtgw490kjs!'
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 jwt = JWTManager(app)
 

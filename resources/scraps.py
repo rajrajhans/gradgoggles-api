@@ -33,3 +33,7 @@ class CreateScrap(Resource):
             return {"success": "Scrap created successfully"}
         except:
             return {"error": "Error creating Scrap"}
+
+#
+# class HideScrap(Resource):
+#     @jwt_required

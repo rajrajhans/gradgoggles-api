@@ -1,33 +1,91 @@
+from flask import request
 from flask_jwt_extended import get_current_user
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource, reqparse
-from models import User
+from models import User, Scrap
 from playhouse.shortcuts import model_to_dict
 from playhouse.flask_utils import PaginatedQuery
 
 
-class GetCurrentUserData(Resource):
+class UserData(Resource):
     @jwt_required
     def get(self):
-        current_user = get_current_user()
-        return {
-            "email": current_user.email,
-            "fullName": current_user.name,
-            "quote": current_user.quote,
-            "photo": current_user.photo,
-            "gr": current_user.gr,
-            "dob": current_user.dob,
-            "dept": current_user.dept
-        }
 
+        userParser = reqparse.RequestParser()
+        userParser.add_argument('id')
+        userParser.add_argument('email')
+        userParser.add_argument('password')
+        userParser.add_argument('name')
+        userParser.add_argument('GRNo')
+        userParser.add_argument('dept')
+        userParser.add_argument('dob')
+        userParser.add_argument('quote')
+        userParser.add_argument('photo')
+        userParser.add_argument('scraps')
 
-class UpdateCurrentUserData(Resource):
+        data = userParser.parse_args()
+
+        if data["id"] is None:
+            user = get_current_user()
+            current_user_flag = 1
+        else:
+            user = User.get(User.id == data['id'])
+            current_user_flag = 0
+
+        userjson = {"id": user.id}
+
+        if data['email']:
+            userjson["email"] = user.email
+        if data['name']:
+            userjson["name"] = user.name
+        if data['GRNo']:
+            userjson["GRNo"] = user.gr
+        if data['dept']:
+            userjson["dept"] = user.dept
+        if data['dob']:
+            userjson["dob"] = user.dob
+        if data['quote']:
+            userjson["quote"] = user.quote
+        if data['photo']:
+            userjson["photo"] = user.photo
+        if data['scraps']:
+            scrap = Scrap.select().where(user.id == Scrap.posted_to_id)
+            scraps = [model_to_dict(s) for s in scrap]
+            try:
+                for x in scraps:
+                    x["posted_by"].pop('email')
+                    x["posted_by"].pop('password')
+                    x["posted_by"].pop('joined_at')
+                    x["posted_by"].pop('quote')
+                    x["posted_by"].pop('photo')
+                    x["posted_by"].pop('gr')
+                    x["posted_by"].pop('dob')
+                    x["posted_by"].pop('dept')
+
+                    x["posted_to"].pop('email')
+                    x["posted_to"].pop('password')
+                    x["posted_to"].pop('joined_at')
+                    x["posted_to"].pop('quote')
+                    x["posted_to"].pop('photo')
+                    x["posted_to"].pop('gr')
+                    x["posted_to"].pop('dob')
+                    x["posted_to"].pop('dept')
+
+                    if current_user_flag == 0:  # meaning the user is NOT requesting scraps of himself
+                        if not x["visibility"]:
+                            scraps.remove(x)
+            except:
+                pass
+            userjson['scraps'] = scraps
+
+        return userjson
+
     @jwt_required
     def put(self):
         updateParser = reqparse.RequestParser()
         updateParser.add_argument('email')
         updateParser.add_argument('password')
-        updateParser.add_argument('fullName')
+        updateParser.add_argument('name')
         updateParser.add_argument('GRNo')
         updateParser.add_argument('dept')
         updateParser.add_argument('dob')
@@ -39,9 +97,9 @@ class UpdateCurrentUserData(Resource):
         try:
             if data['email'] is not None:
                 return {"error": "Cannot change email"}
-            elif data['fullName'] is not None:
+            elif data['name'] is not None:
                 User.update(
-                    name=data['fullName']
+                    name=data['name']
                 ).where(
                     User.id == current_user.id
                 ).execute()
@@ -86,18 +144,3 @@ class GetAllUserData(Resource):
         users = [model_to_dict(user) for user in pq.get_object_list()]
 
         return users
-
-
-getOneUserParser = reqparse.RequestParser()
-getOneUserParser.add_argument('userid', help='User ID is required', required=True)
-
-
-class GetOneUserData(Resource):
-    @jwt_required
-    def get(self):
-        data = getOneUserParser.parse_args()
-        userSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob,
-                                 User.dept).where(User.id == data['userid'])
-        user = [model_to_dict(user) for user in userSelect]
-
-        return user

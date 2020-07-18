@@ -70,7 +70,7 @@ class UpdateCurrentUserData(Resource):
                     User.id == current_user.id
                 ).execute()
             return {
-                "message": "Updation Successful"
+                "success": "Updation Successful"
             }
         except:
             return {

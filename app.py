@@ -5,8 +5,7 @@ from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from flask_restful import Api
 from custom_json_encoder import custom_json_output
 import models
-from resources import auth
-from resources import userdata
+from resources import auth, userdata, scraps
 import os
 
 app = Flask(__name__)
@@ -56,10 +55,13 @@ def index():
 
 api.add_resource(auth.UserRegistration, '/register')
 api.add_resource(auth.UserLogin, '/login')
+
 api.add_resource(userdata.GetCurrentUserData, '/getCurrentUserData')
 api.add_resource(userdata.UpdateCurrentUserData, '/updateCurrentUserData')
 api.add_resource(userdata.GetAllUserData, '/getAllUserData')
 api.add_resource(userdata.GetOneUserData, '/getOneUserData')
+
+api.add_resource(scraps.CreateScrap, '/createScrap')
 
 if __name__ == "__main__":
     if 'HEROKU' in os.environ:

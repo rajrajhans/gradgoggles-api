@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/scraps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradgoggles.db" beforeDir="false" afterPath="$PROJECT_DIR$/gradgoggles.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/userdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/userdata.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +94,7 @@
       <workItem from="1594645932805" duration="2305000" />
       <workItem from="1594738828385" duration="9217000" />
       <workItem from="1594817277645" duration="6997000" />
-      <workItem from="1595088484454" duration="5657000" />
+      <workItem from="1595088484454" duration="6815000" />
     </task>
     <servers />
   </component>
@@ -137,10 +137,10 @@
       <screen x="1366" y="-544" width="1920" height="1040" />
     </state>
     <state x="1906" y="-289" key="IDE.errors.dialog/0.0.1366.728/1366.-544.1920.1040@1366.-544.1920.1040" timestamp="1593493581322" />
-    <state x="1989" y="-307" width="672" height="678" key="search.everywhere.popup" timestamp="1595088887643">
+    <state x="1989" y="-307" width="672" height="678" key="search.everywhere.popup" timestamp="1595097364940">
       <screen x="1366" y="-532" width="1920" height="1040" />
     </state>
-    <state x="1989" y="-307" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.-532.1920.1040@1366.-532.1920.1040" timestamp="1595088887643" />
+    <state x="1989" y="-307" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.-532.1920.1040@1366.-532.1920.1040" timestamp="1595097364940" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gg_api$gg_api.coverage" NAME="gg-api Coverage Results" MODIFIED="1593956263974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

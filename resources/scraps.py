@@ -47,8 +47,6 @@ class ToggleScrapVisibility(Resource):
         try:
             scrap = Scrap.get(Scrap.id == data['id'] and Scrap.posted_to_id == current_user.id)
 
-            print(scrap.visibility)
-
             if scrap.visibility:
                 Scrap.update(
                     visibility=False

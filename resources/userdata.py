@@ -21,6 +21,63 @@ class GetCurrentUserData(Resource):
         }
 
 
+class UpdateCurrentUserData(Resource):
+    @jwt_required
+    def put(self):
+        updateParser = reqparse.RequestParser()
+        updateParser.add_argument('email')
+        updateParser.add_argument('password')
+        updateParser.add_argument('fullName')
+        updateParser.add_argument('GRNo')
+        updateParser.add_argument('dept')
+        updateParser.add_argument('dob')
+        updateParser.add_argument('quote')
+        current_user = get_current_user()
+
+        data = updateParser.parse_args()
+
+        try:
+            if data['email'] is not None:
+                return {"error": "Cannot change email"}
+            elif data['fullName'] is not None:
+                User.update(
+                    name=data['fullName']
+                ).where(
+                    User.id == current_user.id
+                ).execute()
+            elif data['GRNo'] is not None:
+                User.update(
+                    gr=data['GRNo']
+                ).where(
+                    User.id == current_user.id
+                ).execute()
+            elif data['dept'] is not None:
+                User.update(
+                    dept=data['dept']
+                ).where(
+                    User.id == current_user.id
+                ).execute()
+            elif data['dob'] is not None:
+                User.update(
+                    dob=data['dob']
+                ).where(
+                    User.id == current_user.id
+                ).execute()
+            elif data['quote'] is not None:
+                User.update(
+                    quote=data['quote']
+                ).where(
+                    User.id == current_user.id
+                ).execute()
+            return {
+                "message": "Updation Successful"
+            }
+        except:
+            return {
+                "error": "Error: Check Data Types"
+            }
+
+
 class GetAllUserData(Resource):
     @jwt_required
     def get(self):

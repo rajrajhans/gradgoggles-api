@@ -57,6 +57,7 @@ def index():
 api.add_resource(auth.UserRegistration, '/register')
 api.add_resource(auth.UserLogin, '/login')
 api.add_resource(userdata.GetCurrentUserData, '/getCurrentUserData')
+api.add_resource(userdata.UpdateCurrentUserData, '/updateCurrentUserData')
 api.add_resource(userdata.GetAllUserData, '/getAllUserData')
 api.add_resource(userdata.GetOneUserData, '/getOneUserData')
 

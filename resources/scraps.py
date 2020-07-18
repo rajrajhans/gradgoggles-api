@@ -34,6 +34,35 @@ class CreateScrap(Resource):
         except:
             return {"error": "Error creating Scrap"}
 
-#
-# class HideScrap(Resource):
-#     @jwt_required
+
+class ToggleScrapVisibility(Resource):
+    @jwt_required
+    def put(self):
+        hideScrapParser = reqparse.RequestParser()
+        hideScrapParser.add_argument('id', help='scrap id not present in the request body', required=True)
+
+        current_user = get_current_user()
+        data = hideScrapParser.parse_args()
+
+        try:
+            scrap = Scrap.get(Scrap.id == data['id'] and Scrap.posted_to_id == current_user.id)
+
+            print(scrap.visibility)
+
+            if scrap.visibility:
+                Scrap.update(
+                    visibility=False
+                ).where(
+                    Scrap.id == data['id'] and Scrap.posted_to_id == current_user.id
+                ).execute()
+            else:
+                Scrap.update(
+                    visibility=True
+                ).where(
+                    Scrap.id == data['id'] and Scrap.posted_to_id == current_user.id
+                ).execute()
+
+            return {"success": "Updation successful"}
+
+        except:
+            return{"error":"there was an error hiding the scrap"}

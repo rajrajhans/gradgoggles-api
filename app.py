@@ -60,6 +60,7 @@ api.add_resource(userdata.GetAllUserData, '/getAllUserData')
 api.add_resource(userdata.UserData, '/user')
 
 api.add_resource(scraps.CreateScrap, '/createScrap')
+api.add_resource(scraps.ToggleScrapVisibility, '/toggleScrapVisibility')
 
 if __name__ == "__main__":
     if 'HEROKU' in os.environ:

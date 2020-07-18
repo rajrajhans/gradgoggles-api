@@ -7,6 +7,7 @@ from custom_json_encoder import custom_json_output
 import models
 from resources import auth
 from resources import userdata
+import os
 
 app = Flask(__name__)
 api = Api(app)
@@ -57,8 +58,12 @@ api.add_resource(auth.UserRegistration, '/register')
 api.add_resource(auth.UserLogin, '/login')
 api.add_resource(userdata.GetCurrentUserData, '/getCurrentUserData')
 api.add_resource(userdata.GetAllUserData, '/getAllUserData')
+api.add_resource(userdata.GetOneUserData, '/getOneUserData')
 
 if __name__ == "__main__":
-    app.debug = False
+    if 'HEROKU' in os.environ:
+        app.debug = False
+    else:
+        app.debug = True
     models.initialize()
     app.run()

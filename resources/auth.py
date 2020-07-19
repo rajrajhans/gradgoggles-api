@@ -79,9 +79,13 @@ class UserLogin(Resource):
 class SignS3Request(Resource):
     def get(self):
         if 'HEROKU' in os.environ:
-            S3_BUCKET = os.environ["AWS_ACCESS_KEY_ID"]
-            S3_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
-            S3_SECRET = os.environ["S3_BUCKET"]
+            # S3_BUCKET = os.environ["AWS_ACCESS_KEY_ID"]
+            # S3_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+            # S3_SECRET = os.environ["S3_BUCKET"]
+
+            S3_BUCKET = "gradgoggles"
+            S3_KEY = "AKIAJLLUSGH5DU67SXYA"
+            S3_SECRET = "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"
         else:
             S3_BUCKET = "gradgoggles"
             S3_KEY = "AKIAJLLUSGH5DU67SXYA"

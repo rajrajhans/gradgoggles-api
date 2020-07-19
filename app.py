@@ -55,8 +55,9 @@ def index():
 
 api.add_resource(auth.UserRegistration, '/register')
 api.add_resource(auth.UserLogin, '/login')
+api.add_resource(auth.SignS3Request, '/sign_s3')
 
-api.add_resource(userdata.GetAllUserData, '/getAllUserData')
+api.add_resource(userdata.GetAllUserData, '/users')
 api.add_resource(userdata.UserData, '/user')
 
 api.add_resource(scraps.CreateScrap, '/createScrap')

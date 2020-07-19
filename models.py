@@ -31,7 +31,7 @@ class User(Model):
     dept = CharField(default=None, null=True)
 
     @classmethod
-    def create_user(cls, email, password, name, gr=None, dept=None, dob=None, quote=None):
+    def create_user(cls, email, password, name, photo=None, gr=None, dept=None, dob=None, quote=None):
         try:
             with DATABASE.transaction():
                 user = cls.create(
@@ -41,7 +41,8 @@ class User(Model):
                     gr=gr,
                     dept=dept,
                     dob=dob,
-                    quote=quote
+                    quote=quote,
+                    photo=photo
                 )
         except IntegrityError:
             raise ValueError("User already exists")

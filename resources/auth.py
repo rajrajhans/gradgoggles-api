@@ -1,6 +1,10 @@
+from flask import request
 from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token
 from flask_restful import Resource, reqparse
+import boto3
+import os
+import json
 from models import User
 
 regparser = reqparse.RequestParser()
@@ -11,6 +15,7 @@ regparser.add_argument('GRNo')
 regparser.add_argument('dept')
 regparser.add_argument('dob')
 regparser.add_argument('quote')
+regparser.add_argument('photo')
 
 loginparser = reqparse.RequestParser()
 loginparser.add_argument('email', help='Email cannot be blank', required=True)
@@ -28,7 +33,8 @@ class UserRegistration(Resource):
                          gr=data['GRNo'],
                          dept=data['dept'],
                          dob=data['dob'],
-                         quote=data['quote']
+                         quote=data['quote'],
+                         photo=data['photo']
                          )
 
         access_token = create_access_token(identity=data['email'])
@@ -67,3 +73,31 @@ class UserLogin(Resource):
 
         except:
             return {"exception": "login error"}
+
+
+class SignS3Request(Resource):
+    def get(self):
+        S3_BUCKET = "gradgoggles"
+        S3_KEY = "AKIAJLLUSGH5DU67SXYA"
+        S3_SECRET = "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"
+
+        file_name = request.args.get('file_name')
+        file_type = request.args.get('file_type')
+        s3 = boto3.client('s3',
+                          aws_access_key_id=S3_KEY,
+                          aws_secret_access_key=S3_SECRET)
+
+        presigned_post = s3.generate_presigned_post(
+            Bucket=S3_BUCKET,
+            Key=file_name,
+            Fields={"acl": "public-read", "Content-Type": file_type},
+            Conditions=[
+                {"acl": "public-read"},
+                {"Content-Type": file_type}
+            ],
+            ExpiresIn=3600
+        )
+        return json.dumps({
+            'data': presigned_post,
+            'url': 'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, file_name)
+        })

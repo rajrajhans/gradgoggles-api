@@ -1,3 +1,4 @@
+from botocore.config import Config
 from flask import request
 from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token
@@ -85,7 +86,8 @@ class SignS3Request(Resource):
         file_type = request.args.get('file_type')
         s3 = boto3.client('s3',
                           aws_access_key_id=S3_KEY,
-                          aws_secret_access_key=S3_SECRET)
+                          aws_secret_access_key=S3_SECRET,
+                          config=Config(signature_version='s3v4'))
 
         presigned_post = s3.generate_presigned_post(
             Bucket=S3_BUCKET,

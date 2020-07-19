@@ -78,13 +78,19 @@ class UserLogin(Resource):
 
 class SignS3Request(Resource):
     def get(self):
-        S3_BUCKET = "gradgoggles"
-        S3_KEY = "AKIAJLLUSGH5DU67SXYA"
-        S3_SECRET = "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"
+        if 'HEROKU' in os.environ:
+            S3_BUCKET = os.environ["AWS_ACCESS_KEY_ID"]
+            S3_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+            S3_SECRET = os.environ["S3_BUCKET"]
+        else:
+            S3_BUCKET = "gradgoggles"
+            S3_KEY = "AKIAJLLUSGH5DU67SXYA"
+            S3_SECRET = "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"
 
         file_name = request.args.get('file_name')
         file_type = request.args.get('file_type')
         s3 = boto3.client('s3',
+                          region_name="ap-south-1",
                           aws_access_key_id=S3_KEY,
                           aws_secret_access_key=S3_SECRET,
                           config=Config(signature_version='s3v4'))

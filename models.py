@@ -53,8 +53,8 @@ class User(Model):
 
 
 class Scrap(Model):
-    posted_by = ForeignKeyField(model=User,related_name='posted_by')
-    posted_to = ForeignKeyField(model=User,related_name='posted_for')
+    posted_by = ForeignKeyField(model=User, related_name='posted_by')
+    posted_to = ForeignKeyField(model=User, related_name='posted_for')
     content = TextField()
     timestamp = DateTimeField(default=datetime.now)
     visibility = BooleanField(default=True)

@@ -1,4 +1,4 @@
-from flask import request
+from datetime import datetime
 from flask_jwt_extended import get_current_user
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource, reqparse
@@ -90,6 +90,7 @@ class UserData(Resource):
         updateParser.add_argument('dept')
         updateParser.add_argument('dob')
         updateParser.add_argument('quote')
+        updateParser.add_argument('photo')
         current_user = get_current_user()
 
         data = updateParser.parse_args()
@@ -117,13 +118,19 @@ class UserData(Resource):
                 ).execute()
             elif data['dob'] is not None:
                 User.update(
-                    dob=data['dob']
+                    dob=datetime.strptime(data['dob'], '%d/%m/%y')
                 ).where(
                     User.id == current_user.id
                 ).execute()
             elif data['quote'] is not None:
                 User.update(
                     quote=data['quote']
+                ).where(
+                    User.id == current_user.id
+                ).execute()
+            elif data['photo'] is not None:
+                User.update(
+                    quote=data['photo']
                 ).where(
                     User.id == current_user.id
                 ).execute()
@@ -134,6 +141,19 @@ class UserData(Resource):
             return {
                 "error": "Error: Check Data Types"
             }
+
+
+class SearchUserData(Resource):
+    def get(self):
+        searchParser = reqparse.RequestParser()
+        searchParser.add_argument('query')
+
+        data = searchParser.parse_args()
+        users = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr).where(User.name.contains(data['query']))
+
+        usersjson = [model_to_dict(user, fields_from_query=users) for user in users]
+
+        return usersjson
 
 
 class GetAllUserData(Resource):

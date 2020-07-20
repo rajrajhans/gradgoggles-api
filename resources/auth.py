@@ -1,3 +1,4 @@
+from datetime import datetime
 from botocore.config import Config
 from flask import request
 from flask_bcrypt import check_password_hash
@@ -28,12 +29,16 @@ class UserRegistration(Resource):
         data = regparser.parse_args()
         if User.get_or_none(User.email == data['email']) is not None:
             return {"error": "User already exists"}
+        try:
+            formatted_dob = datetime.strptime(data['dob'], '%d/%m/%y')
+        except:
+            formatted_dob = None
         User.create_user(email=data['email'],
                          password=data['password'],
                          name=data['fullName'],
                          gr=data['GRNo'],
                          dept=data['dept'],
-                         dob=data['dob'],
+                         dob=formatted_dob,
                          quote=data['quote'],
                          photo=data['photo']
                          )

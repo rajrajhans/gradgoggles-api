@@ -48,7 +48,7 @@ class UserRegistration(Resource):
 
         return {
             'name': data['fullName'],
-            'photo': 'nothing',  # todo
+            'photo': data['photo'],  # todo
             'access_token': access_token,
             'refresh_token': refresh_token
         }

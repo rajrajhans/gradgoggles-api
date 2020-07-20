@@ -30,7 +30,7 @@ class UserRegistration(Resource):
         if User.get_or_none(User.email == data['email']) is not None:
             return {"error": "User already exists"}
         try:
-            formatted_dob = datetime.strptime(data['dob'], '%d/%m/%y')
+            formatted_dob = datetime.strptime(data['dob'], '%d/%m/%Y')
         except:
             formatted_dob = None
         User.create_user(email=data['email'],
@@ -48,7 +48,7 @@ class UserRegistration(Resource):
 
         return {
             'name': data['fullName'],
-            'photo': data['photo'],  # todo
+            'photo': data['photo'],
             'access_token': access_token,
             'refresh_token': refresh_token
         }

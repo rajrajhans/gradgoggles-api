@@ -1,5 +1,5 @@
 import logging
-from flask import Flask, jsonify, g
+from flask import Flask, jsonify, g, request
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from flask_restful import Api
@@ -38,6 +38,11 @@ def before_request():
     g.db = models.DATABASE_proxy
     g.db.connection()
     g.user = get_jwt_identity()
+    # logging
+    app.logger.debug('Headers: %s', request.headers)
+    app.logger.debug('Body: %s', request.get_data())
+    print("request log: Headers:", request.headers)
+    print("request log: Body:", request.get_data())
 
 
 @app.after_request

@@ -50,7 +50,8 @@ class UserRegistration(Resource):
             'name': data['fullName'],
             'photo': data['photo'],
             'access_token': access_token,
-            'refresh_token': refresh_token
+            'refresh_token': refresh_token,
+            'error': 'none'
         }
 
 
@@ -72,7 +73,8 @@ class UserLogin(Resource):
                         'name': user.name,
                         'photo': user.photo,
                         'access_token': access_token,
-                        'refresh_token': refresh_token
+                        'refresh_token': refresh_token,
+                        'error':'none'
                     }
                 else:
                     return {'error': 'Email or password does not match'}

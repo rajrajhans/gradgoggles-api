@@ -64,3 +64,23 @@ class ToggleScrapVisibility(Resource):
 
         except:
             return{"error":"there was an error hiding the scrap"}
+
+
+class DeleteScrap(Resource):
+    @jwt_required
+    def put(self):
+        delScrapParser = reqparse.RequestParser()
+        delScrapParser.add_argument('id', help='scrap id not present in the request body', required=True)
+
+        current_user = get_current_user()
+        data = delScrapParser.parse_args()
+
+        try:
+            scrap = Scrap.get(Scrap.id == data['id'] and Scrap.posted_to_id == current_user.id)
+
+            scrap.delete_instance()
+
+            return {"success": "Updation successful"}
+
+        except:
+            return {"error": "there was an error in deleting the scrap"}

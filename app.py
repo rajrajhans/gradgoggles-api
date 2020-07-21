@@ -6,7 +6,8 @@ from flask_restful import Api
 from custom_json_encoder import custom_json_output
 import models
 from resources import auth, userdata, scraps
-import os
+import os, json
+from requests_toolbelt.multipart import decoder
 
 app = Flask(__name__)
 api = Api(app)
@@ -39,11 +40,14 @@ def before_request():
     g.db.connection()
     g.user = get_jwt_identity()
     # logging
-    app.logger.debug('Headers: %s', request.headers)
-    app.logger.debug('Body: %s', request.get_data())
-    print("request log: Headers:", request.headers)
-    print("request log: Body:", request.get_data())
-
+    if request.get_data():
+        multipart_string = request.get_data()
+        content_type = request.headers["Content-Type"]
+        print("\nRequest Body:")
+        for part in decoder.MultipartDecoder(multipart_string, content_type).parts:
+            print(str(part.headers)[44:].replace('"', '').replace('}', '').strip("'"), ":", part.text)
+    if request.args:
+        print("\nRequest Args:", request.args, '\n')
 
 @app.after_request
 def after_request(response):
@@ -67,6 +71,7 @@ api.add_resource(userdata.UserData, '/user')
 api.add_resource(userdata.SearchUserData, '/search')
 
 api.add_resource(scraps.CreateScrap, '/createScrap')
+api.add_resource(scraps.DeleteScrap, '/deleteScrap')
 api.add_resource(scraps.ToggleScrapVisibility, '/toggleScrapVisibility')
 
 if __name__ == "__main__":

@@ -143,6 +143,7 @@ class UserData(Resource):
 
 
 class SearchUserData(Resource):
+    @jwt_required
     def get(self):
         searchParser = reqparse.RequestParser()
         searchParser.add_argument('query')

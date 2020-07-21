@@ -129,7 +129,7 @@ class UserData(Resource):
                 ).execute()
             if data['photo'] is not None:
                 User.update(
-                    quote=data['photo']
+                    photo=data['photo']
                 ).where(
                     User.id == current_user.id
                 ).execute()

@@ -117,7 +117,7 @@ class UserData(Resource):
                 ).execute()
             if data['dob'] is not None:
                 User.update(
-                    dob=datetime.strptime(data['dob'], '%d/%m/%y')
+                    dob=datetime.strptime(data['dob'], '%d/%m/%Y')
                 ).where(
                     User.id == current_user.id
                 ).execute()

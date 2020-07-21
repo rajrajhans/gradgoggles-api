@@ -57,7 +57,6 @@ class UserData(Resource):
                     x["posted_by"].pop('password')
                     x["posted_by"].pop('joined_at')
                     x["posted_by"].pop('quote')
-                    x["posted_by"].pop('photo')
                     x["posted_by"].pop('gr')
                     x["posted_by"].pop('dob')
                     x["posted_by"].pop('dept')

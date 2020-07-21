@@ -97,37 +97,37 @@ class UserData(Resource):
         try:
             if data['email'] is not None:
                 return {"error": "Cannot change email"}
-            elif data['name'] is not None:
+            if data['name'] is not None:
                 User.update(
                     name=data['name']
                 ).where(
                     User.id == current_user.id
                 ).execute()
-            elif data['GRNo'] is not None:
+            if data['GRNo'] is not None:
                 User.update(
                     gr=data['GRNo']
                 ).where(
                     User.id == current_user.id
                 ).execute()
-            elif data['dept'] is not None:
+            if data['dept'] is not None:
                 User.update(
                     dept=data['dept']
                 ).where(
                     User.id == current_user.id
                 ).execute()
-            elif data['dob'] is not None:
+            if data['dob'] is not None:
                 User.update(
                     dob=datetime.strptime(data['dob'], '%d/%m/%y')
                 ).where(
                     User.id == current_user.id
                 ).execute()
-            elif data['quote'] is not None:
+            if data['quote'] is not None:
                 User.update(
                     quote=data['quote']
                 ).where(
                     User.id == current_user.id
                 ).execute()
-            elif data['photo'] is not None:
+            if data['photo'] is not None:
                 User.update(
                     quote=data['photo']
                 ).where(

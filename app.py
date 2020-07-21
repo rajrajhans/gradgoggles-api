@@ -6,9 +6,7 @@ from flask_restful import Api
 from custom_json_encoder import custom_json_output
 import models
 from resources import auth, userdata, scraps
-import os, json
-from requests_toolbelt.multipart import decoder
-
+import os
 app = Flask(__name__)
 api = Api(app)
 api.representations.update({
@@ -41,11 +39,7 @@ def before_request():
     g.user = get_jwt_identity()
     # logging
     if request.get_data():
-        multipart_string = request.get_data()
-        content_type = request.headers["Content-Type"]
-        print("\nRequest Body:")
-        for part in decoder.MultipartDecoder(multipart_string, content_type).parts:
-            print(str(part.headers)[44:].replace('"', '').replace('}', '').strip("'"), ":", part.text)
+        print("\nRequest Body:", request.get_data(), '\n')
     if request.args:
         print("\nRequest Args:", request.args, '\n')
 

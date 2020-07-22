@@ -22,7 +22,7 @@ class CreateScrap(Resource):
             posted_by_user = User.get(User.id == current_user.id)
             posted_to_user = User.get(User.id == data['posted_to_id'])
         except:
-            return{"error": "User not found"}
+            return{"msg": "User not found"}
 
         try:
             Scrap.create(
@@ -30,9 +30,9 @@ class CreateScrap(Resource):
                 posted_to=posted_to_user,
                 content=data['content']
             )
-            return {"success": "Scrap created successfully"}
+            return {"msg": "Scrap created successfully"}
         except:
-            return {"error": "Error creating Scrap"}
+            return {"msg": "Error creating Scrap"}
 
 
 class ToggleScrapVisibility(Resource):
@@ -60,10 +60,10 @@ class ToggleScrapVisibility(Resource):
                    (Scrap.id == data['id']) & (Scrap.posted_to_id == current_user.id)
                 ).execute()
 
-            return {"success": "Updation successful"}
+            return {"msg": "Updation successful"}
 
         except:
-            return{"error": "there was an error hiding the scrap"}
+            return{"msg": "there was an error hiding the scrap"}
 
 
 class DeleteScrap(Resource):
@@ -80,7 +80,7 @@ class DeleteScrap(Resource):
 
             scrap.delete_instance()
 
-            return {"success": "Updation successful"}
+            return {"msg": "Updation successful"}
 
         except:
-            return {"error": "there was an error in deleting the scrap"}
+            return {"msg": "there was an error in deleting the scrap"}

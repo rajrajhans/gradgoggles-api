@@ -96,7 +96,7 @@ class UserData(Resource):
 
         try:
             if data['email'] is not None:
-                return {"error": "Cannot change email"}
+                return {"msg": "Cannot change email"}
             if data['name'] is not None:
                 User.update(
                     name=data['name']
@@ -134,11 +134,11 @@ class UserData(Resource):
                     User.id == current_user.id
                 ).execute()
             return {
-                "success": "Updation Successful"
+                "msg": "Updation Successful"
             }
         except:
             return {
-                "error": "Error: Check Data Types"
+                "msg": "Error: Check Data Types"
             }
 
 

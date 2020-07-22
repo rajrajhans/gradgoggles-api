@@ -74,7 +74,10 @@ class ResendConfirmationEmail(Resource):
     def get(self):
         user = get_current_user()
         token = generate_confirmation_token(user.email)
-        send_confirmation_mail(user.email, user.name, token)
+        if user.isVerified:
+            return {"msg": "User already verified"}
+        else:
+            send_confirmation_mail(user.email, user.name, token)
         print("Email sent to ", user.email)
 
 

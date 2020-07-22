@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/email_verification.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/email_verification.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +96,7 @@
       <workItem from="1595177393759" duration="1201000" />
       <workItem from="1595240157002" duration="988000" />
       <workItem from="1595241927438" duration="21730000" />
-      <workItem from="1595330406708" duration="23668000" />
+      <workItem from="1595330406708" duration="24000000" />
     </task>
     <servers />
   </component>
@@ -177,17 +176,6 @@
     </state>
     <state x="443" y="158" width="672" height="475" key="search.everywhere.popup/0.0.1366.728/1366.-532.1920.1040@0.0.1366.728" timestamp="1595163022321" />
     <state x="1989" y="-307" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.-532.1920.1040@1366.-532.1920.1040" timestamp="1595097364940" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/resources/auth.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gg_api$gg_api.coverage" NAME="gg-api Coverage Results" MODIFIED="1595099895252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

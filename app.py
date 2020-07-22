@@ -59,14 +59,11 @@ def index():
 def deletee():
 
         for x in range(6, 45):
-            try:
-                scrap = models.User.get(models.User.id == x)
+            scrap = models.User.get(models.User.id == x)
 
-                if scrap.id not in [41, 42, 45, 27, 39, 40]:
-                    scrap.delete_instance()
-                    print(scrap.id, " deleted")
-            except:
-                continue
+            if scrap.id not in [41, 42, 45, 27, 39, 40]:
+                scrap.delete_instance()
+                print(scrap.id, " deleted")
 
         return {"msg": "Updation successful"}
 

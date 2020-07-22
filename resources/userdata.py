@@ -147,19 +147,11 @@ class SearchUserData(Resource):
     def get(self):
         searchParser = reqparse.RequestParser()
         searchParser.add_argument('query')
-        searchParser.add_argument('category')
 
         data = searchParser.parse_args()
 
-        if data['category']:
-            users = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept,
-                                User.gr).where(User.category.contains(data['category']))
-
-            usersjson = [model_to_dict(user, fields_from_query=users) for user in users]
-
-            return usersjson
-
-        users = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr).where(User.name.contains(data['query']))
+        users = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr).where(
+            User.name.contains(data['query']))
 
         usersjson = [model_to_dict(user, fields_from_query=users) for user in users]
 
@@ -169,6 +161,19 @@ class SearchUserData(Resource):
 class GetAllUserData(Resource):
     @jwt_required
     def get(self):
+        searchParser = reqparse.RequestParser()
+        searchParser.add_argument('dept')
+
+        data = searchParser.parse_args()
+
+        if data['dept']:
+            usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr).where(User.dept.contains(data['dept']))
+
+            pq = PaginatedQuery(usersSelect, paginate_by=10)
+            users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
+
+            return users
+
         usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob, User.dept)
         pq = PaginatedQuery(usersSelect, paginate_by=10)
         users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]

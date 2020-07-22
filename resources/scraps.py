@@ -76,7 +76,7 @@ class DeleteScrap(Resource):
         data = delScrapParser.parse_args()
 
         try:
-            scrap = Scrap.get(Scrap.id == data['id'] and Scrap.posted_to_id == current_user.id)
+            scrap = Scrap.get((Scrap.id == data['id']) & (Scrap.posted_to_id == current_user.id))
 
             scrap.delete_instance()
 

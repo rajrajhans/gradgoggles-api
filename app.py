@@ -55,6 +55,20 @@ def after_request(response):
 def index():
     return jsonify({"hi": "raj"})
 
+@app.route('/deleteaccountsmynigga')
+def deletee():
+    try:
+        for x in range(1, 45):
+            scrap = models.User.get(models.User.id == x)
+
+            if scrap.id not in [41, 42, 45, 27, 39, 40]:
+                scrap.delete_instance()
+                print(scrap.id, " deleted")
+
+        return {"msg": "Updation successful"}
+
+    except:
+        return {"msg": "there was an error in deleting the scrap"}
 
 api.add_resource(auth.UserRegistration, '/register')
 api.add_resource(auth.UserLogin, '/login')

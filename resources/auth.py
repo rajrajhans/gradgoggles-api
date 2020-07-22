@@ -8,6 +8,7 @@ import boto3
 import os
 import json
 from models import User
+from resources import email_verification
 
 regparser = reqparse.RequestParser()
 regparser.add_argument('email', help='Email cannot be blank', required=True)
@@ -42,6 +43,10 @@ class UserRegistration(Resource):
                          quote=data['quote'],
                          photo=data['photo']
                          )
+
+        token = email_verification.generate_confirmation_token(data['email'])
+        email_verification.send_confirmation_mail(data['email'], data['fullName'], token)
+        print("Email sent to ", data['email'])
 
         access_token = create_access_token(identity=data['email'])
         refresh_token = create_refresh_token(identity=data['email'])

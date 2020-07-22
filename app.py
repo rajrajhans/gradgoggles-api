@@ -5,8 +5,9 @@ from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from flask_restful import Api
 from custom_json_encoder import custom_json_output
 import models
-from resources import auth, userdata, scraps
+from resources import auth, userdata, scraps, email_verification
 import os
+
 app = Flask(__name__)
 api = Api(app)
 api.representations.update({
@@ -43,6 +44,7 @@ def before_request():
     if request.args:
         print("\nRequest Args:", request.args, '\n')
 
+
 @app.after_request
 def after_request(response):
     # close database connection
@@ -55,23 +57,13 @@ def after_request(response):
 def index():
     return jsonify({"hi": "raj"})
 
-@app.route('/deleteaccountsmynigga')
-def deletee():
-
-        for x in range(6, 45):
-            scrap = models.User.get(models.User.id == x)
-
-            if scrap.id not in [41, 42, 45, 27, 39, 40]:
-                scrap.delete_instance()
-                print(scrap.id, " deleted")
-
-        return {"msg": "Updation successful"}
-
-
 
 api.add_resource(auth.UserRegistration, '/register')
 api.add_resource(auth.UserLogin, '/login')
 api.add_resource(auth.SignS3Request, '/sign_s3')
+api.add_resource(email_verification.ConfirmUser, '/verify')
+api.add_resource(email_verification.ResendConfirmationEmail, '/resend_email')
+api.add_resource(email_verification.CheckUserVerification, '/check_verification')
 
 api.add_resource(userdata.GetAllUserData, '/users')
 api.add_resource(userdata.UserData, '/user')

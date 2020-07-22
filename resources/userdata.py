@@ -157,6 +157,7 @@ class SearchUserData(Resource):
 
 
 class GetAllUserData(Resource):
+    @jwt_required
     def get(self):
         usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob, User.dept)
         pq = PaginatedQuery(usersSelect, paginate_by=10)

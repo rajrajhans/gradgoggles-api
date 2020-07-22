@@ -45,25 +45,25 @@ class ToggleScrapVisibility(Resource):
         data = hideScrapParser.parse_args()
 
         try:
-            scrap = Scrap.get(Scrap.id == data['id'] & Scrap.posted_to_id == current_user.id)
+            scrap = Scrap.get((Scrap.id == data['id']) & (Scrap.posted_to_id == current_user.id))
 
             if scrap.visibility:
                 Scrap.update(
                     visibility=False
                 ).where(
-                    Scrap.id == data['id'] & Scrap.posted_to_id == current_user.id
+                    (Scrap.id == data['id']) & (Scrap.posted_to_id == current_user.id)
                 ).execute()
             else:
                 Scrap.update(
                     visibility=True
                 ).where(
-                    Scrap.id == data['id'] & Scrap.posted_to_id == current_user.id
+                   (Scrap.id == data['id']) & (Scrap.posted_to_id == current_user.id)
                 ).execute()
 
             return {"success": "Updation successful"}
 
         except:
-            return{"error":"there was an error hiding the scrap"}
+            return{"error": "there was an error hiding the scrap"}
 
 
 class DeleteScrap(Resource):

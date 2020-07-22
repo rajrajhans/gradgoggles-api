@@ -129,7 +129,7 @@ class SignS3Request(Resource):
 
 class ChangePassword(Resource):
     @jwt_required
-    def changePassword(self):
+    def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('current_password')
         parser.add_argument('new_password')

@@ -1,6 +1,6 @@
 from datetime import datetime
 from botocore.config import Config
-from flask import request
+from flask import request, render_template, make_response
 from flask_bcrypt import check_password_hash, generate_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_current_user
 from flask_restful import Resource, reqparse
@@ -143,5 +143,51 @@ class ChangePassword(Resource):
             ).where(
                 User.id == user.id
             ).execute()
+            return {'msg': 'Password Changed'}
         else:
             return {'msg': 'Password does not match'}
+
+
+class ForgotPassword(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('token')
+
+        data = parser.parse_args()
+
+        try:
+            email = email_verification.confirm_token(data['token'])
+            if not email:
+                return {"msg": "Token Expired or Invalid"}
+        except:
+            return {"msg": "Token Expired or Invalid"}  # TODO: Show the User a Page
+
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('forgotPassword.html', email=email), 200, headers)
+
+    def post(self):
+        data = request.form
+        User.update(
+            password=generate_password_hash(data['new_password'])
+        ).where(
+            User.email == data['email']
+        ).execute()
+
+        return {"msg": "Password Changed"}
+
+
+class ForgotPasswordSendMail(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('email')
+
+        data = parser.parse_args()
+        email = data['email']
+        user = User.get_or_none(User.email == email)
+
+        if user:
+            token = email_verification.generate_confirmation_token(email)
+            email_verification.send_passwordreset_mail(email, user.name, token)
+            return {"token": token}
+        else:
+            return {"msg": "email does not exist, please sign up"}

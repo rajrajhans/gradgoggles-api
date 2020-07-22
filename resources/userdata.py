@@ -157,10 +157,9 @@ class SearchUserData(Resource):
 
 
 class GetAllUserData(Resource):
-    @jwt_required
     def get(self):
         usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob, User.dept)
         pq = PaginatedQuery(usersSelect, paginate_by=10)
-        users = [model_to_dict(user) for user in pq.get_object_list()]
+        users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
 
         return users

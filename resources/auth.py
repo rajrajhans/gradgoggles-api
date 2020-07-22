@@ -188,6 +188,7 @@ class ForgotPasswordSendMail(Resource):
         if user:
             token = email_verification.generate_confirmation_token(email)
             email_verification.send_passwordreset_mail(email, user.name, token)
-            return {"token": token}
+            print("reset mail sent to", email)
+            return {"msg": "email sent"}
         else:
             return {"msg": "email does not exist, please sign up"}

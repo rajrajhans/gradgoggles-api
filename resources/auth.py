@@ -1,8 +1,8 @@
 from datetime import datetime
 from botocore.config import Config
 from flask import request
-from flask_bcrypt import check_password_hash
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_bcrypt import check_password_hash, generate_password_hash
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_current_user
 from flask_restful import Resource, reqparse
 import boto3
 import os
@@ -79,7 +79,7 @@ class UserLogin(Resource):
                         'photo': user.photo,
                         'access_token': access_token,
                         'refresh_token': refresh_token,
-                        'error':'none'
+                        'error': 'none'
                     }
                 else:
                     return {'error': 'Email or password does not match'}
@@ -125,3 +125,23 @@ class SignS3Request(Resource):
             'data': presigned_post,
             'url': 'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, file_name)
         })
+
+
+class ChangePassword(Resource):
+    @jwt_required
+    def changePassword(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('current_password')
+        parser.add_argument('new_password')
+
+        data = parser.parse_args()
+        user = get_current_user()
+
+        if check_password_hash(user.password, data['current_password']):
+            User.update(
+                password=generate_password_hash(data['new_password'])
+            ).where(
+                User.id == user.id
+            ).execute()
+        else:
+            return {'msg': 'Password does not match'}

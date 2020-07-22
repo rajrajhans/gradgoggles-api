@@ -61,6 +61,7 @@ def index():
 api.add_resource(auth.UserRegistration, '/register')
 api.add_resource(auth.UserLogin, '/login')
 api.add_resource(auth.SignS3Request, '/sign_s3')
+api.add_resource(auth.ChangePassword, '/change_password')
 api.add_resource(email_verification.ConfirmUser, '/verify')
 api.add_resource(email_verification.ResendConfirmationEmail, '/resend_email')
 api.add_resource(email_verification.CheckUserVerification, '/check_verification')

@@ -41,6 +41,7 @@ def before_request():
     # logging
     if request.get_data():
         print("\nRequest Body:", request.get_data(), '\n')
+        print("\nRequest Headers:", request.headers, '\n')
     if request.args:
         print("\nRequest Args:", request.args, '\n')
 

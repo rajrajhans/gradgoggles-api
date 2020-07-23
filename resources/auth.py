@@ -31,7 +31,7 @@ class UserRegistration(Resource):
         if User.get_or_none(User.email == data['email']) is not None:
             return {"error": "User already exists"}
         try:
-            formatted_dob = datetime.strptime(data['dob'], '%d/%m/%Y')
+            formatted_dob = datetime.strptime(data['dob'], '%d-%m-%Y')
         except:
             formatted_dob = None
         User.create_user(email=data['email'],

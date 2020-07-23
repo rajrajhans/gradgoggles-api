@@ -169,13 +169,13 @@ class GetAllUserData(Resource):
         if data['dept']:
             usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr).where(User.dept.contains(data['dept']))
 
-            pq = PaginatedQuery(usersSelect, paginate_by=10)
+            pq = PaginatedQuery(usersSelect, paginate_by=9)
             users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
 
             return users
 
         usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob, User.dept)
-        pq = PaginatedQuery(usersSelect, paginate_by=10)
+        pq = PaginatedQuery(usersSelect, paginate_by=9)
         users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
 
         return users

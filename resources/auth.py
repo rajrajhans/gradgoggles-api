@@ -45,8 +45,8 @@ class UserRegistration(Resource):
                          )
 
         token = email_verification.generate_confirmation_token(data['email'])
-        email_verification.send_confirmation_mail(data['email'], data['fullName'], token)
-        print("Email sent to ", data['email'])
+        # email_verification.send_confirmation_mail(data['email'], data['fullName'], token)
+        print("Email not sent to ", data['email'])
 
         access_token = create_access_token(identity=data['email'])
         refresh_token = create_refresh_token(identity=data['email'])
@@ -187,8 +187,8 @@ class ForgotPasswordSendMail(Resource):
 
         if user:
             token = email_verification.generate_confirmation_token(email)
-            email_verification.send_passwordreset_mail(email, user.name, token)
-            print("reset mail sent to", email)
+            # email_verification.send_passwordreset_mail(email, user.name, token)
+            print("reset mail not sent to", email)
             return {"msg": "email sent"}
         else:
             return {"msg": "email does not exist, please sign up"}

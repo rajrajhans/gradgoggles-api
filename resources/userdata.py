@@ -159,7 +159,7 @@ class SearchUserData(Resource):
 
 
 class GetAllUserData(Resource):
-    @jwt_required
+    # @jwt_required
     def get(self):
         searchParser = reqparse.RequestParser()
         searchParser.add_argument('dept')
@@ -167,14 +167,15 @@ class GetAllUserData(Resource):
         data = searchParser.parse_args()
 
         if data['dept']:
-            usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr).where(User.dept.contains(data['dept']))
+            usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept,
+                                      User.gr).where(User.dept.contains(data['dept'])).where(User.is2020 == True)
 
             pq = PaginatedQuery(usersSelect, paginate_by=9)
             users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
 
             return users
 
-        usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob, User.dept)
+        usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob, User.dept).where(User.is2020 == True)
         pq = PaginatedQuery(usersSelect, paginate_by=9)
         users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
 

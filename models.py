@@ -61,7 +61,7 @@ class Scrap(Model):
     posted_to = ForeignKeyField(model=User, related_name='posted_for')
     content = TextField()
     timestamp = DateTimeField(default=datetime.now)
-    visibility = BooleanField(default=True)
+    visibility = BooleanField(default=False)
 
     class Meta:
         database = DATABASE_proxy

@@ -24,7 +24,8 @@ class User(Model):
     password = CharField(max_length=150)
     joined_at = DateTimeField(default=datetime.now)
     isVerified = BooleanField(default=None, null=True)
-    
+    is2020 = BooleanField(default=None, null=True)
+
     quote = TextField(default=None, null=True)
     photo = CharField(max_length=200, default=None, null=True)
     gr = CharField(max_length=50, default=None, null=True)
@@ -32,7 +33,7 @@ class User(Model):
     dept = CharField(default=None, null=True)
 
     @classmethod
-    def create_user(cls, email, password, name, photo=None, gr=None, dept=None, dob=None, quote=None, isVerified=False):
+    def create_user(cls, email, password, name, photo=None, gr=None, dept=None, dob=None, quote=None, isVerified=False, is2020=False):
         try:
             with DATABASE.transaction():
                 user = cls.create(
@@ -44,7 +45,8 @@ class User(Model):
                     dob=dob,
                     quote=quote,
                     photo=photo,
-                    isVerified=isVerified
+                    isVerified=isVerified,
+                    is2020=is2020
                 )
         except IntegrityError:
             raise ValueError("User already exists")

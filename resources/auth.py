@@ -19,6 +19,7 @@ regparser.add_argument('dept')
 regparser.add_argument('dob')
 regparser.add_argument('quote')
 regparser.add_argument('photo')
+regparser.add_argument('is2020')
 
 loginparser = reqparse.RequestParser()
 loginparser.add_argument('email', help='Email cannot be blank', required=True)
@@ -34,6 +35,10 @@ class UserRegistration(Resource):
             formatted_dob = datetime.strptime(data['dob'], '%d-%m-%Y')
         except:
             formatted_dob = None
+        if data['is2020'] == '2020':
+            is2020 = True
+        else:
+            is2020 = False
         User.create_user(email=data['email'],
                          password=data['password'],
                          name=data['fullName'],
@@ -41,7 +46,8 @@ class UserRegistration(Resource):
                          dept=data['dept'],
                          dob=formatted_dob,
                          quote=data['quote'],
-                         photo=data['photo']
+                         photo=data['photo'],
+                         is2020=is2020
                          )
 
         token = email_verification.generate_confirmation_token(data['email'])
@@ -55,7 +61,7 @@ class UserRegistration(Resource):
             'name': data['fullName'],
             'photo': data['photo'],
             'access_token': access_token,
-            'refresh_token': refresh_token,
+            'is2020': is2020,
             'error': 'none'
         }
 
@@ -78,7 +84,7 @@ class UserLogin(Resource):
                         'name': user.name,
                         'photo': user.photo,
                         'access_token': access_token,
-                        'refresh_token': refresh_token,
+                        'is2020': user.is2020,
                         'error': 'none'
                     }
                 else:

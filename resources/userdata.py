@@ -150,8 +150,11 @@ class SearchUserData(Resource):
 
         data = searchParser.parse_args()
 
-        users = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr).where(
-            User.name.contains(data['query']))
+        users = User.select(
+            User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr
+        ).where(
+            User.name.contains((data['query']) & (User.is2020==True))
+        )
 
         usersjson = [model_to_dict(user, fields_from_query=users) for user in users]
 
@@ -175,7 +178,8 @@ class GetAllUserData(Resource):
 
             return users
 
-        usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob, User.dept).where(User.is2020 == True)
+        usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob,
+                                  User.dept).where(User.is2020 == True)
         pq = PaginatedQuery(usersSelect, paginate_by=9)
         users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
 

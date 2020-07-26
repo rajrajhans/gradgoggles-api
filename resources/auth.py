@@ -85,6 +85,7 @@ class UserLogin(Resource):
                         'photo': user.photo,
                         'access_token': access_token,
                         'is2020': user.is2020,
+                        'isVerified': user.isVerified,
                         'error': 'none'
                     }
                 else:

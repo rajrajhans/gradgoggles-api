@@ -95,7 +95,7 @@ class ResendConfirmationEmail(Resource):
         else:
             # send_confirmation_mail(user.email, user.name, token)
             print("Email not sent to ", user.email)
-            return {'error': 'none'}
+            return {'msg': 'success'}
 
 
 class CheckUserVerification(Resource):

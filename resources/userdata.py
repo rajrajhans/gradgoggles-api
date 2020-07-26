@@ -162,7 +162,7 @@ class SearchUserData(Resource):
 
 
 class GetAllUserData(Resource):
-    # @jwt_required
+    @jwt_required
     def get(self):
         searchParser = reqparse.RequestParser()
         searchParser.add_argument('dept')

@@ -153,7 +153,7 @@ class SearchUserData(Resource):
         users = User.select(
             User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr
         ).where(
-            User.name.contains((data['query']) & (User.is2020==True))
+            User.name.contains(data['query']) & (User.is2020==True)
         )
 
         usersjson = [model_to_dict(user, fields_from_query=users) for user in users]

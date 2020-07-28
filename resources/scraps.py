@@ -16,6 +16,9 @@ class CreateScrap(Resource):
 
         current_user = get_current_user()
 
+        if not current_user.isVerified:
+            return{"msg":"Please verify your account to create scrap"}
+
         data = scrapParser.parse_args()
 
         try:

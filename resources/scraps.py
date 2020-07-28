@@ -17,7 +17,7 @@ class CreateScrap(Resource):
         current_user = get_current_user()
 
         if not current_user.isVerified:
-            return{"msg":"Please verify your account to create scrap"}
+            return{"msg": "Please Verify Your Account. If you haven't Received Mail, please re-login after fifteen minutes, and resend email"}
 
         data = scrapParser.parse_args()
 

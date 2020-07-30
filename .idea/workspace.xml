@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="" />
+    <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/userVerified.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/email_verification.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/email_verification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forgotPassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgotPassword.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +104,8 @@
       <workItem from="1595479694987" duration="21004000" />
       <workItem from="1595747929719" duration="3704000" />
       <workItem from="1595819468552" duration="752000" />
-      <workItem from="1595943123299" duration="308000" />
+      <workItem from="1595943123299" duration="1588000" />
+      <workItem from="1596118057794" duration="3779000" />
     </task>
     <servers />
   </component>
@@ -173,10 +180,10 @@
       <screen x="1366" y="-532" width="1920" height="1040" />
     </state>
     <state x="2056" y="-207" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog/0.0.1366.728/1366.-532.1920.1040@1366.-532.1920.1040" timestamp="1595103253697" />
-    <state x="443" y="158" width="672" height="475" key="search.everywhere.popup" timestamp="1595163022321">
+    <state x="443" y="158" width="672" height="475" key="search.everywhere.popup" timestamp="1596121060927">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="443" y="158" width="672" height="475" key="search.everywhere.popup/0.0.1366.728/1366.-532.1920.1040@0.0.1366.728" timestamp="1595163022321" />
+    <state x="443" y="158" width="672" height="475" key="search.everywhere.popup/0.0.1366.728/1366.-532.1920.1040@0.0.1366.728" timestamp="1596121060927" />
     <state x="1989" y="-307" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.-532.1920.1040@1366.-532.1920.1040" timestamp="1595097364940" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

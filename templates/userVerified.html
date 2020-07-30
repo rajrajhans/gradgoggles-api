@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password | GradGoggles</title>
+    <title>User Verified | GradGoggles</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <style>
         body{
@@ -74,7 +74,7 @@
 <body>
     <div class="topbar">
         <a href='https://gradgoggles.com'>
-        <img src="https://assets.rajrajhans.com/gg_compressed.png">
+        <img src="https://assets.rajrajhans.com/gg_compressed.png" alt="GradGoggles">
         </a>
     </div>
 
@@ -82,17 +82,10 @@
         <div class="checkmark">
             <img src="https://gradgoggles.s3.ap-south-1.amazonaws.com/reset_password.png" alt="GradGoggles">
         </div>
-        <div class="heading">Password Reset</div>
+        <div class="heading">User Verified</div>
         <div class="text">
-            {{ email }}, thanks for verifying your identity. Please enter a new password for your GradGoggles account.
+            {{ name }}, thanks for verifying your account. You now have access to all of the features that GradGoggles has to offer.
         </div>
-
-        <form action = "" method = "POST">
-            <label>New Password</label>
-            <input type = "password" name = "new_password" />
-            <p><input type = "hidden" name="email" value = {{ email }} /></p>
-            <input type = "submit" value = "Submit" />
-         </form>
 
         <div class="app">
             <div>Check out our Android app, now available on Google Play Store!</div>

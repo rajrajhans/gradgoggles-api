@@ -4,6 +4,7 @@ from flask_jwt_extended import get_current_user, jwt_required
 from models import User
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from flask import request, render_template, make_response
 
 secret_key = 'rajrajhanskbrtgw490kjs!'
 secret_salt = 'sixty!nine!four!twenty@'
@@ -82,8 +83,8 @@ class ConfirmUser(Resource):
             User.email == email
         ).execute()
 
-        return {"msg": "Verification Successful"}  # TODO: Show the User a Page
-
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('userVerified.html', email=email, name=user.name), 200, headers)
 
 class ResendConfirmationEmail(Resource):
     @jwt_required

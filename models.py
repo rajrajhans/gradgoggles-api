@@ -48,6 +48,7 @@ class User(Model):
                     isVerified=isVerified,
                     is2020=is2020
                 )
+                return user
         except IntegrityError:
             raise ValueError("User already exists")
 

@@ -39,7 +39,7 @@ class UserRegistration(Resource):
             is2020 = True
         else:
             is2020 = False
-        User.create_user(email=data['email'],
+        user = User.create_user(email=data['email'],
                          password=data['password'],
                          name=data['fullName'],
                          gr=data['GRNo'],
@@ -58,6 +58,7 @@ class UserRegistration(Resource):
         refresh_token = create_refresh_token(identity=data['email'])
 
         return {
+            'id': user.id,
             'name': data['fullName'],
             'photo': data['photo'],
             'access_token': access_token,
@@ -81,6 +82,7 @@ class UserLogin(Resource):
                     refresh_token = create_refresh_token(identity=data['email'])
 
                     return {
+                        'id': user.id,
                         'name': user.name,
                         'photo': user.photo,
                         'access_token': access_token,

@@ -90,6 +90,7 @@ class UserData(Resource):
         updateParser.add_argument('dob')
         updateParser.add_argument('quote')
         updateParser.add_argument('photo')
+        updateParser.add_argument('is2020')
         current_user = get_current_user()
 
         data = updateParser.parse_args()
@@ -133,6 +134,16 @@ class UserData(Resource):
                 ).where(
                     User.id == current_user.id
                 ).execute()
+            if data['is2020'] is not None:
+                if data['is2020'] == "true":
+                    is2020 = True
+                else:
+                    is2020 = False
+                User.update(
+                    is2020=is2020
+                ).where(
+                    User.id == current_user.id
+                ).execute()
             return {
                 "msg": "Updation Successful"
             }
@@ -153,7 +164,7 @@ class SearchUserData(Resource):
         users = User.select(
             User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr
         ).where(
-            User.name.contains(data['query']) & (User.is2020==True)
+            User.name.contains(data['query']) & (User.is2020 == True)
         )
 
         usersjson = [model_to_dict(user, fields_from_query=users) for user in users]

@@ -4,6 +4,7 @@ from flask_restful import Resource, reqparse
 from models import User, Scrap
 from playhouse.shortcuts import model_to_dict
 from playhouse.flask_utils import PaginatedQuery
+from resources import email_verification
 
 
 # expects 'posted_to_id' & 'content in body
@@ -33,6 +34,8 @@ class CreateScrap(Resource):
                 posted_to=posted_to_user,
                 content=data['content']
             )
+            email_verification.send_scrap_mail(posted_to_user.email,posted_to_user.name)
+            print("Scrap Email sent to ", posted_to_user.email)
             return {"msg": "Scrap created successfully"}
         except:
             return {"msg": "Error creating Scrap"}

@@ -25,6 +25,7 @@ class User(Model):
     joined_at = DateTimeField(default=datetime.now)
     isVerified = BooleanField(default=None, null=True)
     is2020 = BooleanField(default=None, null=True)
+    isfeatured = IntegerField(default=0)
 
     quote = TextField(default=None, null=True)
     photo = CharField(max_length=200, default=None, null=True)
@@ -33,7 +34,7 @@ class User(Model):
     dept = CharField(default=None, null=True)
 
     @classmethod
-    def create_user(cls, email, password, name, photo=None, gr=None, dept=None, dob=None, quote=None, isVerified=False, is2020=False):
+    def create_user(cls, email, password, name, photo=None, gr=None, dept=None, dob=None, quote=None, isVerified=False, is2020=False, isfeatured=0):
         try:
             with DATABASE.transaction():
                 user = cls.create(
@@ -46,7 +47,8 @@ class User(Model):
                     quote=quote,
                     photo=photo,
                     isVerified=isVerified,
-                    is2020=is2020
+                    is2020=is2020,
+                    isfeatured=isfeatured
                 )
                 return user
         except IntegrityError:

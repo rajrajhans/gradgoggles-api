@@ -70,6 +70,7 @@ api.add_resource(email_verification.ResendConfirmationEmail, '/resend_email')
 api.add_resource(email_verification.CheckUserVerification, '/check_verification')
 
 api.add_resource(userdata.GetAllUserData, '/users')
+api.add_resource(userdata.GetAllUserDataTen, '/usersandroid')
 api.add_resource(userdata.UserData, '/user')
 api.add_resource(userdata.SearchUserData, '/search')
 

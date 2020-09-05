@@ -112,7 +112,7 @@ class ResendConfirmationEmail(Resource):
         if user.isVerified:
             return {"msg": "User already verified"}
         else:
-            # send_confirmation_mail(user.email, user.name, token)
+            send_confirmation_mail(user.email, user.name, token)
             print("Email not sent to ", user.email)
             return {'msg': 'success'}
 

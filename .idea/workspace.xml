@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="" />
+    <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test_db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradgoggles.db" beforeDir="false" afterPath="$PROJECT_DIR$/gradgoggles.db" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,6 +108,9 @@
       <workItem from="1596191004524" duration="671000" />
       <workItem from="1596218208643" duration="656000" />
       <workItem from="1596290190899" duration="4986000" />
+      <workItem from="1596305606907" duration="636000" />
+      <workItem from="1596363324784" duration="991000" />
+      <workItem from="1599206649026" duration="755000" />
     </task>
     <servers />
   </component>

@@ -14,7 +14,7 @@ api.representations.update({
     'application/json': custom_json_output
 })
 cors = CORS(app)
-logging.getLogger('flask_cors').level = logging.DEBUG
+# logging.getLogger('flask_cors').level = logging.DEBUG
 
 app.secret_key = 'rajrajhanskbrtgw490kjs!'
 app.config['JWT_SECRET-KEY'] = 'rajrajhanskbrtgw490kjs!'
@@ -39,11 +39,11 @@ def before_request():
     g.db.connection()
     g.user = get_jwt_identity()
     # logging
-    if request.get_data():
-        print("\nRequest Body:", request.get_data(), '\n')
-        # print("\nRequest Headers:", request.headers, '\n')
-    if request.args:
-        print("\nRequest Args:", request.args, '\n')
+    # if request.get_data():
+    #     print("\nRequest Body:", request.get_data(), '\n')
+    #     # print("\nRequest Headers:", request.headers, '\n')
+    # if request.args:
+    #     print("\nRequest Args:", request.args, '\n')
 
 
 @app.after_request

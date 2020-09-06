@@ -172,6 +172,27 @@ class SearchUserData(Resource):
         return usersjson
 
 
+class SearchUserDataPaginated(Resource):
+    @jwt_required
+    def get(self):
+        searchParser = reqparse.RequestParser()
+        searchParser.add_argument('query')
+
+        data = searchParser.parse_args()
+
+        userSelect = User.select(
+            User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept, User.gr
+        ).where(
+            User.name.contains(data['query']) & (User.is2020 == True)
+        )
+
+        pq = PaginatedQuery(userSelect, paginate_by=10)
+
+        users = [model_to_dict(user, fields_from_query=userSelect) for user in pq.get_object_list()]
+
+        return users
+
+
 class GetAllUserData(Resource):
     @jwt_required
     def get(self):

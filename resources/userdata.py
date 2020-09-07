@@ -228,7 +228,7 @@ class GetAllUserDataTen(Resource):
 
         if data['dept']:
             usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.dob, User.dept,
-                                      User.gr).where(User.dept.contains(data['dept'])).where(User.is2020 == True).order_by(User.isfeatured.desc())
+                                      User.gr).where(User.dept.contains(data['dept'])).where(User.is2020 == True).order_by(User.isfeatured.desc(), User.id)
 
             pq = PaginatedQuery(usersSelect, paginate_by=10)
             users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
@@ -236,7 +236,7 @@ class GetAllUserDataTen(Resource):
             return users
 
         usersSelect = User.select(User.id, User.name, User.email, User.quote, User.photo, User.gr, User.dob,
-                                  User.dept).where(User.is2020 == True).order_by(User.isfeatured.desc())
+                                  User.dept).where(User.is2020 == True).order_by(User.isfeatured.desc(), User.id)
         pq = PaginatedQuery(usersSelect, paginate_by=10)
         users = [model_to_dict(user, fields_from_query=usersSelect) for user in pq.get_object_list()]
 

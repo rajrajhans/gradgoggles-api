@@ -51,7 +51,7 @@ class UserRegistration(Resource):
                          )
 
         token = email_verification.generate_confirmation_token(data['email'])
-        email_verification.send_confirmation_mail(data['email'], data['fullName'], token)
+        # email_verification.send_confirmation_mail(data['email'], data['fullName'], token)
         print("Email sent to ", data['email'])
 
         access_token = create_access_token(identity=data['email'])

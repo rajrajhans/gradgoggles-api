@@ -34,7 +34,8 @@ class User(Model):
     dept = CharField(default=None, null=True)
 
     @classmethod
-    def create_user(cls, email, password, name, photo=None, gr=None, dept=None, dob=None, quote=None, isVerified=False, is2020=False, isfeatured=0):
+    def create_user(cls, email, password, name, photo=None, gr=None, dept=None, dob=None, quote=None, isVerified=False,
+                    is2020=False, isfeatured=0):
         try:
             with DATABASE.transaction():
                 user = cls.create(
@@ -53,6 +54,14 @@ class User(Model):
                 return user
         except IntegrityError:
             raise ValueError("User already exists")
+
+    @classmethod
+    def delete_user(cls, email):
+        try:
+            user_created = cls.get(cls.email == email)
+            user_created.delete_instance()
+        except:
+            raise InternalError
 
     class Meta:
         database = DATABASE_proxy

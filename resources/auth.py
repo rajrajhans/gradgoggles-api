@@ -103,6 +103,10 @@ class SignS3Request(Resource):
             S3_BUCKET = os.environ["S3_BUCKET"]
             S3_KEY = os.environ["AWS_ACCESS_KEY_ID"]
             S3_SECRET = os.environ["AWS_SECRET_ACCESS_KEY"]
+            print("s3key", S3_KEY)
+            print("s3bucket", S3_BUCKET)
+            print("s3secret", S3_SECRET)
+
         else:
             S3_BUCKET = os.environ["S3_BUCKET"]
             S3_KEY = os.environ["AWS_ACCESS_KEY_ID"]

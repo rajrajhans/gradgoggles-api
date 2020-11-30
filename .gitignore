@@ -14,6 +14,7 @@ venv
 venv/**
 .idea
 .idea/**
+__pycache__
 
 # User-specific stuff
 .idea/**/workspace.xml

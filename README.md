@@ -22,7 +22,7 @@ Gradgoggles is a virtual yearbook and scrapbook application developed using Flas
 
 ---
 
-This repo contains the source code for GradGoggles API developed using Flask in Python. The GG WebApp and Android app both use this API. 
+This repo contains the source code for GradGoggles API developed using Flask in Python. Currently, the API is hosted at [api.gradgoggles.com](https://api.gradgoggles.com). The GG WebApp and Android app both use this API. 
 
 ### Functionalities implemented in the API -
 
@@ -37,7 +37,31 @@ The `/tests` folder contains some unit tests to ensure the critical functionalit
 
 For more details and source code for the GradGoggles WebApp and the Android app, check out [this repository](https://github.com/rajrajhans/gradgoggles).   
 
-### Running the api locally 
+## Endpoints
+
+In case you want to take a look at a specific functionality, I've included a list of the endpoints that the API provides, along with the links to the corresponding code files - 
+
+#### Open Endpoints
+
+Open endpoints require no Authentication.
+
+* [Login](/resources/auth.py): `POST /login/`
+* [Register](/resources/auth.py): `POST /register/`
+* [Forgot Password](/resources/auth.py): `POST /forgotPassword/`
+* [Signed Request for S3 Upload](/resources/auth.py): `POST /sign_s3/`   
+* [Send, Verify Confirmation Tokens vis email](/resources/email_verification.py): `POST /verify`
+
+#### Endpoints that require Authentication
+
+Closed endpoints require a valid Token to be included in the header of the request. A Token can be acquired from the Login endpoint mentioned above.
+
+* [Get all users (Paginated)](/resources/userdata.py): `GET /users`
+* [Get a specific user's data](/resources/userdata.py): `GET /user` 
+* [Update current user's data](/resources/userdata.py): `PUT /user` 
+* [Search for a user based on query](/resources/userdata.py): `GET /search?query=xx`
+* [Create new Scrap](/resources/scraps.py): `POST /scraps`
+
+## Running the api locally 
 
 In the project directory, you can run:
 

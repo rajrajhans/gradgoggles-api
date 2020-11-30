@@ -8,6 +8,8 @@
 
 .db
 .env
+.pytest_cache
+.pytest_cache/**
 
 # User-specific stuff
 .idea/**/workspace.xml

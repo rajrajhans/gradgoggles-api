@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="684bf99b-ffcb-4140-81ed-7eb45d6dfc02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradgoggles.db" beforeDir="false" afterPath="$PROJECT_DIR$/gradgoggles.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +127,9 @@
       <workItem from="1603889731454" duration="1798000" />
       <workItem from="1604765246414" duration="282000" />
       <workItem from="1605624836438" duration="300000" />
+      <workItem from="1605625777243" duration="169000" />
+      <workItem from="1606328444939" duration="2468000" />
+      <workItem from="1606339237459" duration="8000" />
     </task>
     <servers />
   </component>

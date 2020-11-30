@@ -10,24 +10,18 @@ import json
 from models import User
 from resources import email_verification
 
-regparser = reqparse.RequestParser()
-regparser.add_argument('email', help='Email cannot be blank', required=True)
-regparser.add_argument('password', help='Password cannot be blank', required=True)
-regparser.add_argument('fullName', help='Full Name cannot be blank', required=True)
-regparser.add_argument('GRNo')
-regparser.add_argument('dept')
-regparser.add_argument('dob')
-regparser.add_argument('quote')
-regparser.add_argument('photo')
-regparser.add_argument('is2020')
-
-loginparser = reqparse.RequestParser()
-loginparser.add_argument('email', help='Email cannot be blank', required=True)
-loginparser.add_argument('password', help='Password cannot be blank', required=True)
-
-
 class UserRegistration(Resource):
     def post(self):
+        regparser = reqparse.RequestParser()
+        regparser.add_argument('email', help='Email cannot be blank', required=True)
+        regparser.add_argument('password', help='Password cannot be blank', required=True)
+        regparser.add_argument('fullName', help='Full Name cannot be blank', required=True)
+        regparser.add_argument('GRNo')
+        regparser.add_argument('dept')
+        regparser.add_argument('dob')
+        regparser.add_argument('quote')
+        regparser.add_argument('photo')
+        regparser.add_argument('is2020')
         data = regparser.parse_args()
         if User.get_or_none(User.email == data['email']) is not None:
             return {"error": "User already exists"}
@@ -70,6 +64,9 @@ class UserRegistration(Resource):
 class UserLogin(Resource):
     def post(self):
         try:
+            loginparser = reqparse.RequestParser()
+            loginparser.add_argument('email', help='Email cannot be blank', required=True)
+            loginparser.add_argument('password', help='Password cannot be blank', required=True)
             data = loginparser.parse_args()
 
             user = User.get_or_none(User.email == data['email'])

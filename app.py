@@ -16,8 +16,8 @@ api.representations.update({
 cors = CORS(app)
 # logging.getLogger('flask_cors').level = logging.DEBUG
 
-app.secret_key = 'rajrajhanskbrtgw490kjs!'
-app.config['JWT_SECRET-KEY'] = 'rajrajhanskbrtgw490kjs!'
+app.secret_key = os.environ["APP_SECRET"]
+app.config['JWT_SECRET-KEY'] = os.environ["JWT_SECRET"]
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 

@@ -10,6 +10,10 @@
 .env
 .pytest_cache
 .pytest_cache/**
+venv
+venv/**
+.idea
+.idea/**
 
 # User-specific stuff
 .idea/**/workspace.xml

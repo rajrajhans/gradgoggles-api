@@ -28,10 +28,12 @@ This repo contains the source code for GradGoggles API developed using Flask in 
 
 - Create, Read, Update, Search, Delete users, their details, and their scraps.
 - JWT based Authentication. 
-- Email address verification using Timed Serializer Tokens. Uses Sendgrid to actually send the emails. 
+- Email address verification using Timed Serializer Tokens. Uses SendGrid to actually send the emails. 
     - The timed serialized tokens are also used for the "Forgot Password" functionality.
 - Client side file upload to s3 using signed requests. (Check [this](https://rajrajhans.com/2020/06/2-ways-to-upload-files-to-s3-in-flask/) for more details)
 - Pagination for `/users` endpoint response. 
+
+The API is deployed using Heroku. The web server used is [Gunicorn](https://devcenter.heroku.com/articles/python-gunicorn). It uses Heroku's PostgreSQL database. We use CloudFlare to manage DNS for gradgoggles.com.  
 
 The `/tests` folder contains some unit tests to ensure the critical functionalities of the codebase do not break. You can run all tests using `python -m pytest` 
 
